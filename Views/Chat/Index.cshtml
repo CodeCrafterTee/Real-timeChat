@@ -1,0 +1,34 @@
+@model List<RealTimeChat.Models.Message>
+@{
+    ViewBag.Title = "Chat Room";
+}
+
+<div class="chat-container">
+    <div class="rooms">
+        @foreach (var room in ViewBag.Rooms)
+        {
+            <a href="/Chat/Index?roomId=@room.Id" class="room-btn @(room.Id == ViewBag.CurrentRoomId ? "active" : "")">@room.Name</a>
+        }
+    </div>
+
+    <div class="chat-box">
+        <div id="messages">
+            @foreach (var msg in Model)
+            {
+                <div class="message"><strong>@msg.User.DisplayName:</strong> @msg.Content <span class="time">@msg.Timestamp.ToString("HH:mm")</span></div>
+            }
+        </div>
+
+        <div id="typing" class="typing-indicator"></div>
+
+        <input type="text" id="messageInput" placeholder="Type a message..." />
+        <button id="sendBtn">Send</button>
+        <button id="darkModeBtn">🌙 Dark Mode</button>
+        <div id="emojiPicker"></div>
+    </div>
+</div>
+
+@section Scripts {
+    <script src="~/lib/signalr/signalr.js"></script>
+    <script src="~/js/chat.js"></script>
+}

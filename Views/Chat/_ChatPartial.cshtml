@@ -1,0 +1,15 @@
+@* Views/Chat/_ChatPartial.cshtml *@
+<div id="messages">
+    @foreach (var msg in Model)
+    {
+        <div class="message">
+            <strong>@msg.User.DisplayName:</strong> @msg.Content
+            <span class="time">@msg.Timestamp.ToString("HH:mm")</span>
+        </div>
+    }
+</div>
+<div id="typing" class="typing-indicator"></div>
+<input type="text" id="messageInput" placeholder="Type a message..." />
+<button id="sendBtn">Send</button>
+<button id="darkModeBtn">🌙 Dark Mode</button>
+<div id="emojiPicker"></div>
